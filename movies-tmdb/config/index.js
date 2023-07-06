@@ -1,0 +1,1 @@
+export const server = 'http://api.themoviedb.org/3/movie';
