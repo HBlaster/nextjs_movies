@@ -8,7 +8,7 @@ export default function Home({movies}) {
   return (
     <div className=" bg-gray-700">
       <Hero/>
-      <PopularMovie movies={movies.results}/>
+      <PopularMovie movies={movies}/>
     </div>
   )
 }
@@ -16,8 +16,19 @@ export default function Home({movies}) {
 export async function getStaticProps() {
   const res = await axios(`${server}/popular?api_key=${process.env.API_KEY}`);
   const movies = res.data;
+  const resGenres = await axios(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.API_KEY}`);
+  const genres = resGenres.data.genres;
+
+  
+
+  // Mapear los géneros a las películas
+  const moviesWithGenres = movies.results.map(movie => {
+    const movieGenres = movie.genre_ids.map(id => genres.find(genre => genre.id === id));
+    return { ...movie, genres: movieGenres };
+  });
 
   return {
-    props:{movies}
-  }
+    props: { movies: moviesWithGenres }
+  };
 }
+
