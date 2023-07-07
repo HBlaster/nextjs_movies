@@ -5,16 +5,18 @@ import PopularMovie from "../components/PopularMovie";
 
 export default function Home({movies}) {
   console.log(movies);
+  const firstImage = movies[0].poster_path;
+  const title = 'Now Paying';
   return (
-    <div className=" bg-gray-700">
-      <Hero/>
-      <PopularMovie movies={movies}/>
+    <div >
+      <Hero image={firstImage}/>
+      <PopularMovie movies={movies} title={title}/>
     </div>
   )
 }
 
 export async function getStaticProps() {
-  const res = await axios(`${server}/popular?api_key=${process.env.API_KEY}`);
+  const res = await axios(`${server}/now_playing?api_key=${process.env.API_KEY}`);
   const movies = res.data;
   const resGenres = await axios(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.API_KEY}`);
   const genres = resGenres.data.genres;
