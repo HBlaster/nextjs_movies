@@ -10,13 +10,9 @@ const Category = ({movies}) => {
     console.log(movies);
     const router = useRouter();
     const {category} = router.query; 
-    let title = category.charAt(0).toUpperCase() + category.slice(1);
-    if(title === 'Top_rated'){
-        title = 'Top Rated'
-    }
 
   return (
-    <PopularMovie movies={movies} title={title}/>
+    <PopularMovie movies={movies} title={category}/>
   )
 }
 

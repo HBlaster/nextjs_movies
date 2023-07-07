@@ -7,7 +7,7 @@ import PopularMovie from "../components/PopularMovie";
 export default function Home({movies}) {
   console.log(movies);
   const firstImage = movies[0].poster_path;
-  const title = 'Now Playing';
+  const title = 'now_playing';
   return (
     <div >
       <Hero image={firstImage}/>
