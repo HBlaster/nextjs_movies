@@ -10,10 +10,11 @@ const Navbar = () => {
             <span className="text-base md:text-2xl">TMDB</span>
         </Link>
         <div className="flex space-x-4">
-            <Link href="/" className="text-neutral-100 hover:text-neutral-200">Upcoming</Link>
-            <Link href="/" className="text-neutral-100 hover:text-neutral-200">Popular</Link>
-            <Link href="/" className="text-neutral-100 hover:text-neutral-200">Top Rated</Link>
+            <Link href="/category/upcoming" className="text-neutral-100 hover:text-neutral-200">Upcoming</Link>
+            <Link href="/category/popular" className="text-neutral-100 hover:text-neutral-200">Popular</Link>
+            <Link href="/category/top_rated" className="text-neutral-100 hover:text-neutral-200">Top Rated</Link>
         </div>
+
     </div>
 </nav>
 )

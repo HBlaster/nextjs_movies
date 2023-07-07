@@ -1,12 +1,13 @@
 import axios from "axios";
 import Hero from "../components/Hero";
 import { server } from '../config/index';
+import { genre } from '../config/index';
 import PopularMovie from "../components/PopularMovie";
 
 export default function Home({movies}) {
   console.log(movies);
   const firstImage = movies[0].poster_path;
-  const title = 'Now Paying';
+  const title = 'Now Playing';
   return (
     <div >
       <Hero image={firstImage}/>
@@ -18,7 +19,7 @@ export default function Home({movies}) {
 export async function getStaticProps() {
   const res = await axios(`${server}/now_playing?api_key=${process.env.API_KEY}`);
   const movies = res.data;
-  const resGenres = await axios(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.API_KEY}`);
+  const resGenres = await axios(`${genre}?api_key=${process.env.API_KEY}`);
   const genres = resGenres.data.genres;
 
   
