@@ -2,7 +2,7 @@ import axios from "axios";
 import Hero from "../components/Hero";
 import { server } from '../config/index';
 import { genre } from '../config/index';
-import PopularMovie from "../components/PopularMovie";
+import Movies from "../components/Movies";
 
 export default function Home({movies}) {
   console.log(movies);
@@ -11,7 +11,7 @@ export default function Home({movies}) {
   return (
     <div >
       <Hero image={firstImage}/>
-      <PopularMovie movies={movies} title={title}/>
+      <Movies movies={movies} title={title}/>
     </div>
   )
 }

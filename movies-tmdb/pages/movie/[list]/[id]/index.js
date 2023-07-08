@@ -4,8 +4,8 @@ import { server } from '../../../../config/index';
 import Image from 'next/image';
 import Meta from '../../../../components/Meta';
 
-const Movie = ({movie}) => {
-    console.log(movie);
+const Movie = ({movie, movieDetails}) => {
+    console.log("credits: ",movieDetails.topBilledCast);
   return (
     <div className="container max-w-4xl mx-auto pt-6" >
       <Meta title={movie.title} />
@@ -19,43 +19,25 @@ const Movie = ({movie}) => {
     </div>
   )
 }
-
-// export async function getStaticProps(context) {
-//     const {id} = context.params; 
-//     const res = await axios(`${server}/${id}?api_key=${process.env.API_KEY}`);
-//     const movie = res.data;
-  
-//     return {
-//       props:{movie}
-//     }
-//   }
-
-// export async function getStaticPaths (){
-//     // const res = await axios(`${server}/popular?api_key=${process.env.API_KEY}`);
-//     const res = await axios(`${server}/${list}?api_key=${process.env.API_KEY}`);
-//     const movies = res.data.results;
-    
-
-//     const ids = movies.map(movie => movie.id);
-//     // const paths = ids.map(id => ({ params: {id: id.toString()} }))
-//     const lists = ['top_rated', 'popular', 'upcoming', 'now_playing'];
-
-//   const paths = lists.flatMap(list =>
-//     movies.map(movie => ({ params: { list, id: movie.id.toString() } }))
-//   );
-  
-//     return {
-//       paths,
-//       fallback:false
-//     }
-// }
 export async function getStaticProps(context) {
   const { id, list } = context.params;
-  const res = await axios(`${server}/${id}?api_key=${process.env.API_KEY}`);
-  const movie = res.data;
+  const [movieRes, creditsRes] = await Promise.all([
+    axios(`${server}/${id}?api_key=${process.env.API_KEY}`),
+    axios(`${server}/${id}/credits?api_key=${process.env.API_KEY}`)
+  ]);
+  const movie = movieRes.data;
+  const credits = creditsRes.data;
+  const topBilledCast = credits.cast.filter(actor => actor.order <= 4);
+  const director = credits.crew.find(member => member.job === "Director");
+  const writers = credits.crew.filter(member => member.department === "Writing").slice(0, 5);
+  const movieDetails = {
+    topBilledCast,
+    director,
+    writers
+  };
 
   return {
-    props: { movie }
+    props: { movie, movieDetails }
   };
 }
 

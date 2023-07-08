@@ -2,8 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import { server } from '../../../config/index';
 import { genre } from '../../../config/index';
-import PopularMovie from '../../../components/PopularMovie';
 import { useRouter } from 'next/router';
+import Movies from '../../../components/Movies';
 
 
 const Category = ({movies}) => {
@@ -12,7 +12,7 @@ const Category = ({movies}) => {
     const {category} = router.query; 
 
   return (
-    <PopularMovie movies={movies} title={category}/>
+    <Movies movies={movies} title={category}/>
   )
 }
 
