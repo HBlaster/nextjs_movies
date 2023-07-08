@@ -20,7 +20,7 @@ const Navbar = () => {
                     <p>Plus</p>
                     <p>Lang</p>
                     <p>Join TMDB</p>
-                    <p>lupa</p>
+                    <p>Lupa</p>
                 </div>
             </div>
         </nav>

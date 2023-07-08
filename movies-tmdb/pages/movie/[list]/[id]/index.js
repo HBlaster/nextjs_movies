@@ -6,7 +6,7 @@ import Meta from '../../../../components/Meta';
 import Crew from '../../../../components/crew';
 
 const Movie = ({ movie, movieDetails }) => {
-  console.log("pelicula recibida en id", movieDetails.producers);
+  console.log("esscritor en producers", movieDetails.producers);
   return (
     <>
       <div className="container max-w-8xl mx-auto pt-6 flex">
@@ -22,7 +22,7 @@ const Movie = ({ movie, movieDetails }) => {
         </div>
         <div className="w-2/3 px-3" style={{ marginTop: 'auto', marginBottom: 'auto' }}>
           <Meta title={movie.title} />
-          <h1 className="font-bold text-xl my-1">{movie.title}</h1> 
+          <h1 className="font-bold text-xl my-1">{movie.title}</h1>
           <p className=" text-gray-600 text-xl">{movie.genres.reduce((acc, genre, index) => {
             if (index === 0) {
               return genre.name;
@@ -33,16 +33,14 @@ const Movie = ({ movie, movieDetails }) => {
             }
           }, "")}</p>
           <p className="text-gray-600 text-xl">{movie.release_date}</p>
-          
+
           <p className="text-gray-600 text-xl mt-4">{movie.overview}</p>
-          
+
           <div className="grid grid-cols-3 gap-4 mt-4">
-      <p className="text-gray-600 text-xl">Director: <span className="font-bold">{movieDetails.director.name}</span></p>
-      <p className="text-gray-600 text-xl">Writer: <span className="font-bold">{movieDetails.writers[0].name}</span></p>
-      <p className="text-gray-600 text-xl">Producer: <span className="font-bold">{movieDetails.producers[0].name}</span></p>
-    </div>
-         
-          {/* <p className="text-gray-600 text-xl">Director: <span className="font-bold">{movieDetails.director.name}</span></p> */}
+            <p className="text-gray-600 text-xl">Director: <span className="font-bold">{movieDetails.director.name}</span></p>
+            <p className="text-gray-600 text-xl">Writer: <span className="font-bold">{movieDetails.writers.name}</span></p>
+            <p className="text-gray-600 text-xl">Producer: <span className="font-bold">{movieDetails.producers.name}</span></p>
+          </div>
         </div>
 
       </div>
@@ -64,8 +62,8 @@ export async function getStaticProps(context) {
   const credits = creditsRes.data;
   const topBilledCast = credits.cast.filter(actor => actor.order <= 4);
   const director = credits.crew.find(member => member.job === "Director");
-  const writers = credits.crew.filter(member => member.department === "Writing").slice(0, 5);
-  const producers = credits.crew.filter(member => member.department === "Production").slice(0, 5);
+  const writers = credits.crew.find(member => member.department === "Writing");
+  const producers = credits.crew.find(member => member.department === "Production");
 
   const movieDetails = {
     topBilledCast,
