@@ -6,6 +6,7 @@ import Meta from '../../../../components/Meta';
 import Crew from '../../../../components/crew';
 
 const Movie = ({ movie, movieDetails }) => {
+  console.log("pelicula recibida en id", movie);
   return (
     <>
     <div className="container max-w-7xl mx-auto pt-6 flex">
@@ -35,8 +36,9 @@ const Movie = ({ movie, movieDetails }) => {
         <p className="text-gray-600 text-sm">Release Date: <span className="font-bold">{movie.release_date}</span></p>
       </div>
     </div>
-    <div className="w-full container max-w-7xl mx-auto">
-        <Crew credits={movieDetails}></Crew>
+    {/* <div className="w-full container max-w-7xl mx-auto"> */}
+    <div className=" container max-w-3xl mx-auto">
+        <Crew credits={movieDetails.topBilledCast}></Crew>
     </div>
       </>
   )
