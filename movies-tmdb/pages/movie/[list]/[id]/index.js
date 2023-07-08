@@ -6,58 +6,72 @@ import Meta from '../../../../components/Meta';
 import Crew from '../../../../components/crew';
 
 const Movie = ({ movie, movieDetails }) => {
-  console.log("pelicula recibida en id", movie);
+  console.log("pelicula recibida en id", movieDetails.producers);
   return (
     <>
-    <div className="container max-w-7xl mx-auto pt-6 flex">
-      <div className="w-1/3">
-        <Image
-          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-          layout="responsive"
-          width={300}
-          height={600}
-          style={{ width: "100%", display: "block", maxHeight: "100vh", objectFit: "cover" }}
-          className="rounded-md"
-          alt={movie.title} />
-      </div>
-      <div className="w-2/3 px-3">
-        <Meta title={movie.title} />
-        <h1 className="font-bold text-xl my-2">{movie.title}</h1>
-        <p className="text-gray-600 text-sm mt-4">{movie.overview}</p>
-        <p className="mt-5 text-gray-600 text-sm">Genres: <span className="font-bold">{movie.genres.reduce((acc, genre, index) => {
-          if (index === 0) {
-            return genre.name;
-          } else if (index === movie.genres.length - 1) {
-            return acc + " & " + genre.name;
-          } else {
-            return acc + ", " + genre.name;
-          }
-        }, "")}</span></p>
-        <p className="text-gray-600 text-sm">Release Date: <span className="font-bold">{movie.release_date}</span></p>
-      </div>
+      <div className="container max-w-8xl mx-auto pt-6 flex">
+        <div className="w-1/3">
+          <img
+            src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie.backdrop_path}`}
+            layout="responsive"
+            width={5}
+            height={5}
+            style={{ width: "100%", display: "block", maxHeight: "100vh", objectFit: "cover" }}
+            className="rounded-md"
+            alt={movie.title} />
+        </div>
+        <div className="w-2/3 px-3" style={{ marginTop: 'auto', marginBottom: 'auto' }}>
+          <Meta title={movie.title} />
+          <h1 className="font-bold text-xl my-1">{movie.title}</h1> 
+          <p className=" text-gray-600 text-xl">{movie.genres.reduce((acc, genre, index) => {
+            if (index === 0) {
+              return genre.name;
+            } else if (index === movie.genres.length - 1) {
+              return acc + " & " + genre.name;
+            } else {
+              return acc + ", " + genre.name;
+            }
+          }, "")}</p>
+          <p className="text-gray-600 text-xl">{movie.release_date}</p>
+          
+          <p className="text-gray-600 text-xl mt-4">{movie.overview}</p>
+          
+          <div className="grid grid-cols-3 gap-4 mt-4">
+      <p className="text-gray-600 text-xl">Director: <span className="font-bold">{movieDetails.director.name}</span></p>
+      <p className="text-gray-600 text-xl">Writer: <span className="font-bold">{movieDetails.writers[0].name}</span></p>
+      <p className="text-gray-600 text-xl">Producer: <span className="font-bold">{movieDetails.producers[0].name}</span></p>
     </div>
-    {/* <div className="w-full container max-w-7xl mx-auto"> */}
-    <div className=" container max-w-3xl mx-auto">
+         
+          {/* <p className="text-gray-600 text-xl">Director: <span className="font-bold">{movieDetails.director.name}</span></p> */}
+        </div>
+
+      </div>
+      <div className=" container max-w-5xl mx-auto">
         <Crew credits={movieDetails.topBilledCast}></Crew>
-    </div>
-      </>
+      </div>
+    </>
   )
 }
 export async function getStaticProps(context) {
-  const { id} = context.params;
+
+  const { id } = context.params;
   const [movieRes, creditsRes] = await Promise.all([
     axios(`${server}/${id}?api_key=${process.env.API_KEY}`),
     axios(`${server}/${id}/credits?api_key=${process.env.API_KEY}`)
   ]);
+
   const movie = movieRes.data;
   const credits = creditsRes.data;
   const topBilledCast = credits.cast.filter(actor => actor.order <= 4);
   const director = credits.crew.find(member => member.job === "Director");
   const writers = credits.crew.filter(member => member.department === "Writing").slice(0, 5);
+  const producers = credits.crew.filter(member => member.department === "Production").slice(0, 5);
+
   const movieDetails = {
     topBilledCast,
     director,
-    writers
+    writers,
+    producers
   };
 
   return {
