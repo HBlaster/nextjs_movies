@@ -34,10 +34,10 @@ export async function getStaticPaths() {
   export async function getStaticProps({ params }) {
     const { category } = params;
   
-    // Perform the query using the [category] parameter
+    // Query to retrieve a list of movies
     const res = await axios(`${server}/${category}?api_key=${process.env.API_KEY}`);
 
-
+    // Query to retrieve genres of movies
     const movies = res.data;
     const resGenres = await axios(`${genre}?api_key=${process.env.API_KEY}`);
     const genres = resGenres.data.genres;

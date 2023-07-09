@@ -5,14 +5,14 @@ import Meta from '../../../../components/Meta';
 import Crew from '../../../../components/crew';
 
 const Movie = ({ movie, movieDetails }) => {
-  const { backdrop_path,genres, title, release_date, overview } = movie;
-  const { topBilledCast,director,writers,producers } = movieDetails;
-  
+  const { backdrop_path, genres, title, release_date, overview } = movie;
+  const { topBilledCast, director, writers, producers } = movieDetails;
+
   return (
-    
-// Rendering movie image, overview, director, writer, and producer data
+
+    // Rendering movie image, overview, director, writer, and producer data
     <>
-      <div className="container max-w-8xl mx-auto pt-6 flex">
+      {/* <div className="container max-w-8xl mx-auto pt-6 flex">
         <div className="w-1/3">
 
           <img
@@ -51,8 +51,44 @@ const Movie = ({ movie, movieDetails }) => {
           </div>
         </div>
 
+      </div> */}
+      <div className="container mx-auto pt-6 flex flex-col lg:flex-row">
+        <div className="w-full lg:w-1/3">
+          <img
+            src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${backdrop_path}`}
+            layout="responsive"
+            width={5}
+            height={5}
+            style={{ width: "100%", display: "block", maxHeight: "100vh", objectFit: "cover" }}
+            className="rounded-md"
+            alt={title}
+          />
+        </div>
+
+        <div className="w-full lg:w-2/3 px-3 mt-6 lg:mt-0" style={{ marginTop: 'auto', marginBottom: 'auto' }}>
+          <Meta title={movie.title} />
+          <h1 className="font-bold text-gray-600 text-xl my-1">{title}</h1>
+          <p className="text-gray-600 text-xl">{genres.reduce((acc, genre, index) => {
+            if (index === 0) {
+              return genre.name;
+            } else if (index === genres.length - 1) {
+              return acc + " y " + genre.name;
+            } else {
+              return acc + ", " + genre.name;
+            }
+          }, "")}</p>
+          <p className="text-gray-600 text-xl">{release_date}</p>
+          <p className="text-gray-600 text-xl mt-4">{overview}</p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+            <p className="text-gray-600 text-xl">Director: <span className="font-bold">{director.name}</span></p>
+            <p className="text-gray-600 text-xl">Escritor: <span className="font-bold">{writers.name}</span></p>
+            <p className="text-gray-600 text-xl">Productor: <span className="font-bold">{producers.name}</span></p>
+          </div>
+        </div>
       </div>
-      
+
+
       {/* Sending actor data to the Crew component */}
 
       <div className=" container max-w-5xl mx-auto">
@@ -93,8 +129,8 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  
-// Define a list of different movie categories
+
+  // Define a list of different movie categories
   const lists = ['top_rated', 'popular', 'upcoming', 'now_playing'];
 
   const paths = [];
