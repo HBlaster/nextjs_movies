@@ -2,8 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import { server } from '../../../../config/index';
 import Meta from '../../../../components/Meta';
-import Crew from '../../../../components/crew';
 import Image from 'next/image';
+import Crew from '../../../../components/Crew';
 
 const Movie = ({ movie, movieDetails }) => {
   const { backdrop_path, genres, title, release_date, overview } = movie;
