@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import React from 'react'
 
-const Meta = ({keywords, description, title}) => {
+const Meta = ({ keywords, description, title }) => {
   return (
+
+    // Setting up meta description
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="keywords" content={keywords} />
@@ -15,9 +17,9 @@ const Meta = ({keywords, description, title}) => {
 }
 
 Meta.defaultProps = {
-   title: 'TMDB', 
-   keywords: 'moive app',
-   description: 'watch movie overviews'
+  title: 'TMDB',
+  keywords: 'moive app',
+  description: 'watch movie overviews'
 }
 
 export default Meta

@@ -7,17 +7,18 @@ import Movies from '../../../components/Movies';
 
 
 const Category = ({movies}) => {
-    console.log(movies);
+  //Retrieve the movie category data to render the title
     const router = useRouter();
     const {category} = router.query; 
 
   return (
+    //Send the obtained data to the Movies component
     <Movies movies={movies} title={category}/>
   )
 }
 
 export async function getStaticPaths() {
-    // Define los posibles valores para [category]
+    // Define the possible values for [category]
     const paths = [
       { params: { category: 'upcoming' } },
       { params: { category: 'popular' } },
@@ -32,9 +33,8 @@ export async function getStaticPaths() {
 
   export async function getStaticProps({ params }) {
     const { category } = params;
-    console.log("categoria recibida",{category});
   
-    // Realiza la consulta utilizando el parámetro [category]
+    // Perform the query using the [category] parameter
     const res = await axios(`${server}/${category}?api_key=${process.env.API_KEY}`);
 
 
@@ -42,7 +42,7 @@ export async function getStaticPaths() {
     const resGenres = await axios(`${genre}?api_key=${process.env.API_KEY}`);
     const genres = resGenres.data.genres;
   
-    // Mapear los géneros a las películas
+    // Map the genres to the movies
     const moviesWithGenres = movies.results.map(movie => {
       const movieGenres = movie.genre_ids.map(id => genres.find(genre => genre.id === id));
       return { ...movie, genres: movieGenres };

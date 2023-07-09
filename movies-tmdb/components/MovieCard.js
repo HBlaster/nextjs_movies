@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 const MovieCard = ({ movie, list}) => {
   return (
+    // Rendering movies in cards
     <Link href={`/movie/${list}/${movie.id}`} >
       <div className=" bg-white shadow-sm rounded-md cursor-pointer">
         <Image src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} width={700} height={800} className=" rounded-t-md" alt="{movie.title}" />
@@ -22,7 +23,7 @@ const MovieCard = ({ movie, list}) => {
             }, "")}
           </span>
           <p className=" text-gray-700 text-base mb-1" >{movie.release_date}</p>
-          <p className=" text-gray-700 text-base mb-1" > ⭐: {movie.vote_average} </p>
+          <p className=" text-gray-700 text-base mb-1" > ⭐ {movie.vote_average} </p>
 
 
 

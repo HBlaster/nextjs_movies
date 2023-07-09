@@ -4,6 +4,8 @@ import Navbar from "./Navbar"
 
 const Layout = ({ children }) => {
   return (
+    
+// Page layout
     <>
     <Meta/>
     <Navbar/>

@@ -3,6 +3,7 @@ import React from 'react'
 
 const CastCard = ({credit}) => {
   return (
+    // Card for main actors' information
     <div className=" bg-white shadow-sm rounded-md cursor-pointer">
         <Image src={`https://image.tmdb.org/t/p/w500${credit.profile_path}`} width={700} height={800} className=" rounded-t-md" alt="{credit.name}"/>
         <div className="px-6 py-2" >
