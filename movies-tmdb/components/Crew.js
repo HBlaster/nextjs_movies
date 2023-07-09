@@ -2,7 +2,6 @@ import React from 'react'
 import CastCard from './CastCard';
 
 const Crew = ({credits}) => {
-    console.log( "credits at crew component" ,credits);
     const title = 'Top Billed Cast'
     return (
       // Grid layout for rendering actors

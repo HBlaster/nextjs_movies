@@ -5,7 +5,6 @@ import { genre } from '../config/index';
 import Movies from "../components/Movies";
 
 export default function Home({movies}) {
-  console.log(movies);
   const firstImage = movies[0].poster_path;
   const title = 'now_playing';
   return (
