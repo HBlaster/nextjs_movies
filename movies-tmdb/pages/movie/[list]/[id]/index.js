@@ -22,7 +22,7 @@ const Movie = ({ movie, movieDetails }) => {
         </div>
         <div className="w-2/3 px-3" style={{ marginTop: 'auto', marginBottom: 'auto' }}>
           <Meta title={movie.title} />
-          <h1 className="font-bold text-xl my-1">{movie.title}</h1>
+          <h1 className="font-bold text-gray-600 text-xl my-1">{movie.title}</h1>
           <p className=" text-gray-600 text-xl">{movie.genres.reduce((acc, genre, index) => {
             if (index === 0) {
               return genre.name;

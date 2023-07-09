@@ -12,7 +12,6 @@ const CastCard = ({credit}) => {
           <span className="text-gray-700 text-base font-bold mb-1">
           character: {credit.character}
           </span>
-       
         </div>
       </div>
   )
