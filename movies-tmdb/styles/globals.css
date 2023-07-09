@@ -4,3 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile */
+.h-300px {
+  height: 300px;
+}
+
+/* Tablet and larger */
+@media (min-width: 768px) {
+  .h-600px {
+    height: 600px;
+  }
+}

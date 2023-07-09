@@ -22,7 +22,7 @@ const MovieCard = ({ movie, list}) => {
             }, "")}
           </span>
           <p className=" text-gray-700 text-base mb-1" >{movie.release_date}</p>
-          <p className=" text-gray-700 text-base mb-1" > Vote Average: {movie.vote_average} ⭐</p>
+          <p className=" text-gray-700 text-base mb-1" > ⭐: {movie.vote_average} </p>
 
 
 

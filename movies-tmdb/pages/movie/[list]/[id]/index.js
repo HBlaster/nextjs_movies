@@ -1,18 +1,18 @@
 import axios from 'axios';
 import React from 'react';
 import { server } from '../../../../config/index';
-import Image from 'next/image';
 import Meta from '../../../../components/Meta';
 import Crew from '../../../../components/crew';
 
 const Movie = ({ movie, movieDetails }) => {
-  console.log("esscritor en producers", movieDetails.producers);
+  const { backdrop_path } = movie;
+  const { topBilledCast,director,writers,producers } = movieDetails;
   return (
     <>
       <div className="container max-w-8xl mx-auto pt-6 flex">
         <div className="w-1/3">
           <img
-            src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${movie.backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${backdrop_path}`}
             layout="responsive"
             width={5}
             height={5}
@@ -22,7 +22,7 @@ const Movie = ({ movie, movieDetails }) => {
         </div>
         <div className="w-2/3 px-3" style={{ marginTop: 'auto', marginBottom: 'auto' }}>
           <Meta title={movie.title} />
-          <h1 className="font-bold text-gray-600 text-xl my-1">{movie.title}</h1>
+          <h1 className="font-bold text-xl my-1">{movie.title}</h1>
           <p className=" text-gray-600 text-xl">{movie.genres.reduce((acc, genre, index) => {
             if (index === 0) {
               return genre.name;
@@ -37,15 +37,15 @@ const Movie = ({ movie, movieDetails }) => {
           <p className="text-gray-600 text-xl mt-4">{movie.overview}</p>
 
           <div className="grid grid-cols-3 gap-4 mt-4">
-            <p className="text-gray-600 text-xl">Director: <span className="font-bold">{movieDetails.director.name}</span></p>
-            <p className="text-gray-600 text-xl">Writer: <span className="font-bold">{movieDetails.writers.name}</span></p>
-            <p className="text-gray-600 text-xl">Producer: <span className="font-bold">{movieDetails.producers.name}</span></p>
+            <p className="text-gray-600 text-xl">Director: <span className="font-bold">{director.name}</span></p>
+            <p className="text-gray-600 text-xl">Writer: <span className="font-bold">{writers.name}</span></p>
+            <p className="text-gray-600 text-xl">Producer: <span className="font-bold">{producers.name}</span></p>
           </div>
         </div>
 
       </div>
       <div className=" container max-w-5xl mx-auto">
-        <Crew credits={movieDetails.topBilledCast}></Crew>
+        <Crew credits={topBilledCast}></Crew>
       </div>
     </>
   )
