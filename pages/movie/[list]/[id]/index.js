@@ -3,6 +3,7 @@ import React from 'react';
 import { server } from '../../../../config/index';
 import Meta from '../../../../components/Meta';
 import Crew from '../../../../components/crew';
+import Image from 'next/image';
 
 const Movie = ({ movie, movieDetails }) => {
   const { backdrop_path, genres, title, release_date, overview } = movie;
@@ -12,49 +13,9 @@ const Movie = ({ movie, movieDetails }) => {
 
     // Rendering movie image, overview, director, writer, and producer data
     <>
-      {/* <div className="container max-w-8xl mx-auto pt-6 flex">
-        <div className="w-1/3">
-
-          <img
-            src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${backdrop_path}`}
-            layout="responsive"
-            width={5}
-            height={5}
-            style={{ width: "100%", display: "block", maxHeight: "100vh", objectFit: "cover" }}
-            className="rounded-md"
-            alt={title} />
-
-        </div>
-
-        <div className="w-2/3 px-3" style={{ marginTop: 'auto', marginBottom: 'auto' }}>
-
-          <Meta title={movie.title} />
-          <h1 className="font-bold text-gray-600 text-xl my-1">{title}</h1>
-          <p className=" text-gray-600 text-xl">{genres.reduce((acc, genre, index) => {
-            if (index === 0) {
-              return genre.name;
-            } else if (index === genres.length - 1) {
-              return acc + " & " + genre.name;
-            } else {
-              return acc + ", " + genre.name;
-            }
-          }, "")}</p>
-          <p className="text-gray-600 text-xl">{release_date}</p>
-          <p className="text-gray-600 text-xl mt-4">{overview}</p>
-
-          <div className="grid grid-cols-3 gap-4 mt-4">
-
-            <p className="text-gray-600 text-xl">Director: <span className="font-bold">{director.name}</span></p>
-            <p className="text-gray-600 text-xl">Writer: <span className="font-bold">{writers.name}</span></p>
-            <p className="text-gray-600 text-xl">Producer: <span className="font-bold">{producers.name}</span></p>
-
-          </div>
-        </div>
-
-      </div> */}
       <div className="container mx-auto pt-6 flex flex-col lg:flex-row">
         <div className="w-full lg:w-1/3">
-          <img
+          <Image
             src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2${backdrop_path}`}
             layout="responsive"
             width={5}
