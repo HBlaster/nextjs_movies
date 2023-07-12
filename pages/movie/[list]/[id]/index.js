@@ -33,7 +33,7 @@ const Movie = ({ movie, movieDetails }) => {
             if (index === 0) {
               return genre.name;
             } else if (index === genres.length - 1) {
-              return acc + " y " + genre.name;
+              return acc + " and " + genre.name;
             } else {
               return acc + ", " + genre.name;
             }
