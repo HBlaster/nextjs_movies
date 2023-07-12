@@ -43,8 +43,8 @@ const Movie = ({ movie, movieDetails }) => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
             <p className="text-gray-600 text-xl">Director: <span className="font-bold">{director.name}</span></p>
-            <p className="text-gray-600 text-xl">Escritor: <span className="font-bold">{writers.name}</span></p>
-            <p className="text-gray-600 text-xl">Productor: <span className="font-bold">{producers.name}</span></p>
+            <p className="text-gray-600 text-xl">Writer: <span className="font-bold">{writers.name}</span></p>
+            <p className="text-gray-600 text-xl">Producer: <span className="font-bold">{producers.name}</span></p>
           </div>
         </div>
       </div>
